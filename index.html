@@ -1,0 +1,180 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>U-Dictionary</title>
+	<meta charset="utf-8">
+	<!-- IMPORT CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="header">
+			<center><img src="img/logo.png" /></center>
+			<button type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#info'>
+				<i class='fa fa-info-circle'></i>
+			</button>
+		</div>
+		<div class="row input">
+			<input class="form-control" type="text" value="" placeholder="Хайх үг..." id="search_word" onchange="check(this.value)"></input>
+		</div>
+		
+		<!-- Modal Info-->
+		<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Хаах</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Тусламж</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="row">
+		      		<button type='button' class='btn btn-primary btn-lg'><i class='fa fa-plus'></i></button> - Энэ товчны тусламжтайгаар та өөрөө үгээ нэмэх боломжтой гарч ирсэн цонхон дээр эхлээд нэмэх үгээ дараа нь та үгийнхээ утгыг бичээд Хадгалах товч дээр дараарай.
+		      	</div>
+
+		      	<div class="row"><button type='button' class='btn btn-primary btn-lg'><i class='fa fa-edit'></i></button> - Энэ товчны тусламжтайгаар та үгийн санд байгаа үгийг өөртөө тааруулан засах боломжтой гарч ирсэн цонхон дээр үгийнхээ утгыг бичээд Хадгалах товч дээр дараарай.</div>
+
+		      	<div class="row"><button type='button' class='btn btn-primary btn-lg'><i class='fa fa-cog'></i></button> - Орчуулсан үг дунд хэрвээ ийм тэмдэглэгээ байвал тэр үгийг та өөрөө нэмсэн эсвэл өөрчлөн зассанг илэрхийлж байгаа.</div>
+		      	<div class="row"><i style="font-size: 30px; color: black;" class="fa fa-exclamation-triangle"></i> - Үгээ орчуулахдаа Англиас Монгол хэл рүү бол үндсэн талбар дээр үгээ Англи хэл дээр бичих Жишээ нь <code>"Car"</code> гэж бичих хэрэгтэй харин Монгол хэлнээс Англи хэл рүү бол <code>"Машин"</code> гэж бичих хэрэгтэй мөн та үг нэмэх болон өөрчилж оруулахдаа заавал Монгол хэл дээр бичих шаардлагагүй учраас өөртөө хялбараар галиглан бичих боломжтой. Хэрвээ та аппликейшнийг ухаалаг төхөөрөмжөөсөө устгасан мөн Application Manager ээс U-Dictionary ийн Clear data-г дарж устгасан тохиолдолд таны оруулсан үг өөрчилсөн үгс устах болно.</div>
+		      	<br>
+		      	<br>
+		      	<div class="row">&copy; 2014 U-Media. Мазаалай аппликейшний үгийн санг зохиогчын зөвшөөрлөөр, ашгийн бус ашигласан болно.</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Modal Plus-->
+		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Хаах</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Үг нэмэх</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<input type="text" id="add_word_val" class="form-control" value="" placeholder="Үг"></input>
+		      	<br>
+		        <textarea type="text" id="add_word_s_val" class="form-control" value="" placeholder="Үгийн утга"></textarea>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
+		        <button type="button" class="btn btn-primary" onclick="add_word()" data-dismiss="modal">Хадгалах</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Modal Custom-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Хаах</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Энэ үгийг өөрчлөх</h4>
+		      </div>
+		      <div class="modal-body">
+		        <textarea type="text" id="custom_word_val" class="form-control" placeholder="Үгийн утга"></textarea>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Хаах</button>
+		        <button type="button" class="btn btn-primary" onclick="customize()" data-dismiss="modal">Хадгалах</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+
+		<div id="translated"></div>
+		<div id="customized"></div>
+		<div class="row"><div id="plus"></div><div id="cog"></div></div>
+	</div>
+</body>
+
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/engmon.js"></script>
+	<script src="js/moneng.js"></script>
+	<script src="js/snowball.min.js"></script>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<!-- Dictionary Logic Code -->
+	<script>
+		function onDeviceReady(){
+			navigator.splashscreen.show();
+		}
+
+		document.getElementById("plus").innerHTML = "<button type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#Modal'><i class='fa fa-plus'></i></button>";
+		var b = 0;
+		function check(word){
+			document.getElementById("translated").innerHTML = "";
+			document.getElementById("customized").innerHTML = "";
+			if (word) {
+				var a = '_' + snowballStemmer(word);
+				if ( dic[0][a] === undefined ) 
+				{
+					for ( i = 0; i < 33337; i++ )
+					{
+						if ( word == dict[i][0] ) 
+						{ 
+							document.getElementById("translated").innerHTML = dict[i][1];
+							b = 1;
+							break;
+						}
+						else
+						{
+							b = 0;
+						}
+					}
+					if ( null === window.localStorage.getItem(word) )
+					{
+					   if ( b == 0 ) document.getElementById("translated").innerHTML = "Энэ үгийн орчуулага алга байна. Та өөрөө нэмэх боломжтой.";
+					}
+					else 
+					{
+						if ( b == 0 ) document.getElementById("translated").innerHTML = "";
+						document.getElementById("customized").innerHTML = "<i class='fa fa-cog'></i> " + window.localStorage.getItem(word);
+						b = 0;
+					}
+				}
+				else 
+				{ 
+					document.getElementById("translated").innerHTML = dic[0][a];
+					if (window.localStorage.getItem(word)) document.getElementById("customized").innerHTML = "<i class='fa fa-cog'></i> " + window.localStorage.getItem(word);
+				}
+				custom_word();
+			}
+			else
+			{
+				document.getElementById("translated").style.display = "none";
+				document.getElementById("cog").style.display = "none";
+			}
+		}
+		
+		function add_word(){
+			var key = document.getElementById("add_word_val").value;
+			var value = document.getElementById("add_word_s_val").value;
+			window.localStorage.setItem(key, value);
+			document.getElementById("add_word_val").value = '';
+			document.getElementById("add_word_s_val").value = '';
+			document.getElementById("search_word").value = '';
+			document.getElementById("translated").value = '';
+		}
+
+		function customize(){
+			var key = document.getElementById("search_word").value;
+			var value = document.getElementById("custom_word_val").value;
+			window.localStorage.setItem(key, value);
+			document.getElementById("custom_word_val").value = "";
+			document.getElementById("search_word").value = "";
+		}
+		
+		function custom_word(){
+			var s_word= document.getElementById("search_word").value;
+			document.getElementById("cog").innerHTML = "<button type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#myModal'><i class='fa fa-edit'></i></button>";
+		}
+	</script>
+</html>
